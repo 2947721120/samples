@@ -1,7 +1,606 @@
-<!doctype html>
+<!DOCTYPE html>
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
 <html>
 <head>
-  <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0;URL='https://www.chromestatus.com/samples'">
+<meta charset="utf-8">
+<title>Chrome Platform Status</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+<link rel="manifest" href="./static/manifest.json">
+
+<meta name="theme-color" content="#366597">
+<link rel="icon" sizes="192x192" href="./static/img/crstatus_192.png">
+
+<!-- iOS: run in full-screen mode and display upper status bar as translucent -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<link rel="apple-touch-icon" href="./static/img/crstatus_128.png">
+<link rel="apple-touch-icon-precomposed" href="./static/img/crstatus_128.png">
+<link rel="shortcut icon" href="./static/img/crstatus_128.png">
+
+<link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+<!-- <link rel="dns-prefetch" href="https://fonts.googleapis.com"> -->
+<!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+
+
+
+<!-- <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400"
+      media="none" onload="this.media='all'">
+ -->
+<!-- <link rel="stylesheet" href="./static/css/main.css"> -->
+<style>html,body{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline}div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,pre,a,abbr,acronym,address,code,del,dfn,em,img,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,caption,tbody,tfoot,thead,tr{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline}blockquote,q{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;quotes:"" ""}blockquote:before,q:before,blockquote:after,q:after{content:""}th,td,caption{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;text-align:left;font-weight:normal;vertical-align:middle}table{margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;border-collapse:separate;border-spacing:0;vertical-align:middle}a img{border:none}*{box-sizing:border-box}*{-webkit-tap-highlight-color:transparent;outline:0}h1,h2,h3,h4{font-weight:300}h1{font-size:30px}h2,h3,h4{color:#444}h2{font-size:25px}h3{font-size:20px}a{text-decoration:none;color:#4580c0}a:hover{text-decoration:underline;color:#366597}b{font-weight:600}input:not([type="submit"]),textarea{border:1px solid #D4D4D4}input:not([type="submit"])[disabled],textarea[disabled]{opacity:0.5}button,.button{display:inline-block;background:linear-gradient(#F9F9F9 40%, #E3E3E3 70%);border:1px solid #a9a9a9;border-radius:3px;padding:5px 8px;outline:none;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;text-shadow:1px 1px #fff;font-size:10pt}button:not(:disabled):hover{border-color:#515151}button:not(:disabled):active{background:linear-gradient(#E3E3E3 40%, #F9F9F9 70%)}.comma::after{content:',\00a0'}html,body{height:100%}body{color:#666;font:14px "Roboto", sans-serif;font-weight:400;-webkit-font-smoothing:antialiased;background-color:#eee}body.loading #spinner{display:flex}body.loading chromedash-toast{visibility:hidden}#spinner{display:none;-ms-grid-row-align:center;align-items:center;justify-content:center;position:fixed;height:calc(100% - 54px - $header-height);max-width:768px;width:100%}app-drawer{font-size:14px}app-drawer .drawer-content-wrapper{height:100%;overflow:auto;padding:16px}app-drawer paper-listbox{background-color:inherit !important}app-drawer paper-listbox paper-item{font-size:inherit !important}app-drawer h3{margin-bottom:16px;text-transform:uppercase;font-weight:500;font-size:14px;color:inherit}app-header{background-color:#eee;right:0;top:0;left:0;z-index:1}app-header[fixed]{position:fixed}.main-toolbar{display:flex;position:relative;padding:0 16px}header,footer{display:flex;align-items:center;text-shadow:0 1px 0 white}header{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}header a{text-decoration:none !important}header nav{display:flex;align-items:center;margin-left:16px}header nav a{background-color:#FAFAFA;background:linear-gradient(to bottom, #fff, #F2F2F2);padding:0.75em 1em;box-shadow:1px 1px 4px rgba(0,0,0,0.065);cursor:pointer;font-size:16px;text-align:center;border-radius:3px;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;white-space:nowrap}header nav a:active{position:relative;top:1px;left:1px;box-shadow:3px 3px 4px rgba(0,0,0,0.065)}header nav a.disabled{opacity:0.5;pointer-events:none}header nav paper-menu-button{margin:0 !important;padding:0 !important;line-height:1}header nav paper-menu-button .dropdown-content{display:flex;flex-direction:column;contain:content}header aside{background-color:#FAFAFA;background:linear-gradient(to bottom, #fff, #F2F2F2);padding:0.75em 1em;box-shadow:1px 1px 4px rgba(0,0,0,0.065);border-bottom-left-radius:5px;border-bottom-right-radius:5px;border-bottom:1px solid #D4D4D4;border-right:1px solid #D4D4D4;background:url(/static/img/chrome_logo.svg) no-repeat 16px 50%;background-size:48px;background-color:#fafafa;padding-left:72px}header aside hgroup a{color:currentcolor}header aside h1{line-height:1}header aside img{height:45px;width:45px;margin-right:7px}footer{background-color:#FAFAFA;background:linear-gradient(to bottom, #fff, #F2F2F2);padding:0.75em 1em;box-shadow:1px 1px 4px rgba(0,0,0,0.065);font-size:12px;box-shadow:0 -2px 5px rgba(0,0,0,0.065);display:flex;flex-direction:column;justify-content:center;text-align:center;position:fixed;bottom:0;left:0;right:0;z-index:1}footer div{margin-top:8px}.description{line-height:1.4}#subheader,.subheader{display:flex;align-items:center;margin:16px 0;max-width:768px}#subheader .num-features,.subheader .num-features{font-weight:400}#subheader div.search input,.subheader div.search input{width:200px;outline:none;padding:10px 7px}#subheader div.actionlinks,.subheader div.actionlinks{display:flex;justify-content:flex-end;flex:1 0 auto;margin-left:16px}#subheader div.actionlinks .blue-button,.subheader div.actionlinks .blue-button{background:#366597;color:#fff;display:inline-flex;align-items:center;justify-content:center;max-height:35px;min-width:5.14em;-webkit-tap-highlight-color:transparent;-webkit-tap-highlight-color:transparent;text-transform:uppercase;text-decoration:none;border-radius:3px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:pointer;padding:0.7em 0.57em}#subheader div.actionlinks .blue-button iron-icon,.subheader div.actionlinks .blue-button iron-icon{margin-right:8px;height:24px;width:24px}#subheader div.actionlinks .legend,.subheader div.actionlinks .legend{font-size:18px;cursor:pointer;text-decoration:none}#container{display:flex;flex-direction:column;height:100%;width:100%}#content{margin:16px;position:relative;height:100%}#panels{display:flex;width:100%;overflow:hidden}@media only screen and (min-width: 701px){.main-toolbar .toolbar-content{max-width:768px}footer{padding-left:200px}app-header{padding-left:200px;left:0 !important}}@media only screen and (max-width: 700px){h1{font-size:24px}h2{font-size:20px}h3{font-size:15px}app-header .main-toolbar{padding:0;display:block}app-header .main-toolbar iron-icon{width:24px}app-drawer{z-index:2}#content{margin-left:0;margin-right:0}header{margin:0;display:block}header aside{display:flex;padding:8px;border-radius:0;background-size:24px;background-position:48px 50%}header aside hgroup{padding-left:48px}header aside hgroup span{display:none}header nav{margin:0;justify-content:center;flex-wrap:wrap}header nav a{padding:5px 10px;margin:0;border-radius:0;flex:1 0 auto}#panels{display:block}#panels nav{display:none}.subheader .description{margin:0 16px}#subheader div:not(.search){display:none}#subheader div.search{text-align:center;flex:1 0 0;margin:0}chromedash-toast{width:100%;left:0;margin:0}}body.loading chromedash-legend{display:none}body.loading chromedash-featurelist{visibility:hidden}body.loading .main-toolbar .dropdown-content{display:none}
+</style>
+
+
+<!-- <link rel="stylesheet" href="./static/css/samples.css?2016-07-14"> -->
+<style>.demo-link iron-icon,paper-item iron-icon{margin-right:8px}paper-input{width:300px;margin:auto;background-color:#fff}app-drawer #papermenu{color:#366597;overflow:auto}app-drawer h3{margin:16px 16px 0 16px}app-drawer .drawer-content-wrapper{padding:0}#subheader .feature-count{min-width:170px}#sample-panel{position:relative;max-width:750px}#samplelist li{margin-bottom:16px;line-height:1.4;list-style:none}#samplelist .card{background:#fff;padding:16px;box-shadow:0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2)}#samplelist iron-icon{color:#a9a9a9;flex-shrink:0}.feature-name{font-weight:400;color:#366597;display:flex;justify-content:space-between}.sample_links{display:flex;justify-content:space-between;align-items:center}.milestone{font-size:16px;white-space:nowrap;color:#797979}.summary{margin:16px 0}.demo-links{margin-right:16px;font-weight:400;color:#366597;display:flex;flex-wrap:wrap}.demo-link{background-color:#F5F5F5;margin:8px 8px 0 0;color:#797979;display:block;padding:0.7em 0.57em;text-transform:uppercase}.demo-link:hover{text-decoration:none}
+</style>
+
+
+
+  
+    <link rel="preload" href="./static/elements/samples-imports.vulcanize.js" as="script">
+  
+
+
+<script>
+window.Polymer = window.Polymer || {
+  dom: 'shadow',
+  lazyRegister: 'max',
+  useNativeCSSProperties: true
+};
+
+var $ = function(selector) {
+  return document.querySelector(selector);
+};
+
+var $$ = function(selector) {
+  return document.querySelectorAll(selector);
+};
+</script>
+
+<style is="custom-style">
+  app-drawer {
+    --app-drawer-width: 200px;
+    --app-drawer-content-container: {
+      background: #eee;
+    };
+  }
+  paper-item {
+    --paper-item: {
+      cursor: pointer;
+    };
+  }
+</style>
+
+
+  <link rel="import" href="./static/elements/samples-imports.vulcanize.html">
+
+
+
+<link rel="alternate" type="application/rss+xml" href="http://www.chromestatus.com/samples.xml" title="All samples" />
+
 </head>
+<body class="loading">
+
+<app-drawer-layout fullbleed>
+  <app-drawer swipe-open>
+    <div class="drawer-content-wrapper">
+      
+  <h3>Category filter</h3>
+  
+  <paper-listbox id="papermenu">
+  
+  
+    
+  
+    
+      <paper-item data-category="misc">
+        <iron-icon icon="chromestatus:misc"></iron-icon>Misc
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="security">
+        <iron-icon icon="chromestatus:security"></iron-icon>Security
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="multimedia">
+        <iron-icon icon="chromestatus:multimedia"></iron-icon>Multimedia
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="dom">
+        <iron-icon icon="chromestatus:dom"></iron-icon>DOM
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="fileapis">
+        <iron-icon icon="chromestatus:fileapis"></iron-icon>File APIs
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="offlinestorage">
+        <iron-icon icon="chromestatus:offlinestorage"></iron-icon>Offline / Storage
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="device">
+        <iron-icon icon="chromestatus:device"></iron-icon>Device
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="realtimecommunication">
+        <iron-icon icon="chromestatus:realtimecommunication"></iron-icon>Realtime / Communication
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="javascript">
+        <iron-icon icon="chromestatus:javascript"></iron-icon>JavaScript
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="networkconnectivity">
+        <iron-icon icon="chromestatus:networkconnectivity"></iron-icon>Network / Connectivity
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="userinput">
+        <iron-icon icon="chromestatus:userinput"></iron-icon>User input
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="performance">
+        <iron-icon icon="chromestatus:performance"></iron-icon>Performance
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="graphics">
+        <iron-icon icon="chromestatus:graphics"></iron-icon>Graphics
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+    
+      <paper-item data-category="css">
+        <iron-icon icon="chromestatus:css"></iron-icon>CSS
+        <paper-ripple></paper-ripple>
+      </paper-item>
+    
+  
+  </paper-listbox>
+
+    </div>
+  </app-drawer>
+  <app-header-layout>
+    <app-header reveals fixed effects="waterfall">
+      <div class="main-toolbar">
+        <div class="toolbar-content">
+          <header>
+  <aside>
+    <iron-icon icon="chromestatus:menu" drawer-toggle></iron-icon>
+    <hgroup>
+      <a href="/features" target="_top"><h1>Chrome Platform Status</h1></a>
+      <span>feature support &amp; usage metrics</span>
+    </hgroup>
+  </aside>
+  <nav>
+    <a href="/features">Features</a>
+    <a href="/samples" class="features">Samples</a>
+    <paper-menu-button vertical-align="top" horizontal-align="right">
+      <a href="javascript:void(0)" class="dropdown-trigger">Usage Metrics</a>
+      <div class="dropdown-content" hidden> <!-- hidden removed by lazy load code. -->
+        <a href="/metrics/css/popularity" class="metrics">CSS</a>
+        <a href="/metrics/feature/popularity" class="metrics">JS/HTML</a>
+      </div>
+    </paper-menu-button>
+  </nav>
+</header>
+
+          
+<div id="subheader">
+  <div class="feature-count">
+    <h2>Samples: <span class="num-features"></span></h2>
+  </div>
+  <div class="search">
+    <input type="search" placeholder="Search">
+  </div>
+  <div class="actionlinks">
+    <a href="https://github.com/GoogleChrome/samples" target="_blank" class="blue-button">
+      <iron-icon src="/static/img/github-white.png"></iron-icon>Fork on Github
+    </a>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </app-header>
+
+    <div id="content">
+      <div id="spinner"><img src="/static/img/ring.svg"></div>
+      
+<div class="subheader">
+  <p class="description">Features are ordered by Chrome release version, latest first. Features
+  enabled by default always come first, followed by features that are origin trials,
+  behind a flag or still in the development.</p>
+</div>
+
+<template id="t" is="dom-bind">
+
+<div id="sample-panel">
+
+  
+    <ul id="samplelist" class="card-content">
+      <template is="dom-repeat" items="{{filtered}}" as="feature" initial-count="6">
+        <li>
+          <div class="card">
+            <h3 class="feature-name">
+              <a href$="[[_computeFeatureLink(feature.id)]]">{{feature.name}}</a>
+              <span class="milestone" hidden$="[[!feature.shipped_milestone]]">Chrome <span>[[feature.shipped_milestone]]</span></span>
+            </h3>
+            <div class="summary">[[feature.summary]]</div>
+            <div class="sample_links">
+              <div class="demo-links layout horizontal center">
+                <template is="dom-repeat" items="[[feature.sample_links]]" as="link">
+                  <a href$="[[link]]" target="_blank" class="demo-link">
+                    <iron-icon icon="chromestatus:open-in-browser"></iron-icon> View Demo
+                  </a>
+                </template>
+              </div>
+              <iron-icon icon="[[_computeIconId(feature.category)]]"
+                         title="[[feature.category]]"></iron-icon>
+            </div>
+          </div>
+        </li>
+      </template>
+      </ul>
+  
+
+</div>
+
+</template>
+
+
+    </div>
+
+    <footer>
+  <p>Except as otherwise noted, the content of this page under <a href="https://creativecommons.org/licenses/by/2.5/">CC Attribution 2.5 license</a>. Code examples are <a href="https://github.com/GoogleChrome/samples/blob/gh-pages/LICENSE">Apache2 License</a>.</p>
+  <div><a href="https://groups.google.com/a/chromium.org/forum/#!newtopic/blink-dev">Report a content issue</a> | <a href="https://docs.google.com/a/chromium.org/forms/d/1djZD0COt4NgRwDYesNLkYAb_O8YL39eEvF78vk06R9c/viewform">Request "edit" access</a> | <a href="https://github.com/GoogleChrome/chromium-dashboard/issues">Report site bugs</a> | <a href="https://github.com/GoogleChrome/chromium-dashboard">View on Github</a> | <a href="https://docs.google.com/document/d/1jrSlM4Yhae7XCJ8BuasWx71CvDEMMbSKbXwx7hoh1Co/edit?pli=1" target="_blank">About this page</a> |
+      <a href="https://www.google.com/accounts/ServiceLogin?service=ah&amp;passive=true&amp;continue=https://appengine.google.com/_ah/conflogin%3Fcontinue%3Dhttps://www.chromestatus.com/samples&amp;ltmpl=gm&amp;shdf=CiQLEgZhaG5hbWUaGENocm9tZSBGZWF0dXJlIERhc2hib2FyZAwSAmFoIhR8k-wlKWFhP6GamMw_8Qt437ho6CgBMhSScI6zo1jXRzvWXwHUN-BG6aFFgA">Login</a>
+  </div>
+</footer>
+
+    <!-- <app-header fixed effects="waterfall">
+      <footer>
+  <p>Except as otherwise noted, the content of this page under <a href="https://creativecommons.org/licenses/by/2.5/">CC Attribution 2.5 license</a>. Code examples are <a href="https://github.com/GoogleChrome/samples/blob/gh-pages/LICENSE">Apache2 License</a>.</p>
+  <div><a href="https://groups.google.com/a/chromium.org/forum/#!newtopic/blink-dev">Report a content issue</a> | <a href="https://docs.google.com/a/chromium.org/forms/d/1djZD0COt4NgRwDYesNLkYAb_O8YL39eEvF78vk06R9c/viewform">Request "edit" access</a> | <a href="https://github.com/GoogleChrome/chromium-dashboard/issues">Report site bugs</a> | <a href="https://github.com/GoogleChrome/chromium-dashboard">View on Github</a> | <a href="https://docs.google.com/document/d/1jrSlM4Yhae7XCJ8BuasWx71CvDEMMbSKbXwx7hoh1Co/edit?pli=1" target="_blank">About this page</a> |
+      <a href="https://www.google.com/accounts/ServiceLogin?service=ah&amp;passive=true&amp;continue=https://appengine.google.com/_ah/conflogin%3Fcontinue%3Dhttps://www.chromestatus.com/samples&amp;ltmpl=gm&amp;shdf=CiQLEgZhaG5hbWUaGENocm9tZSBGZWF0dXJlIERhc2hib2FyZAwSAmFoIhR8k-wlKWFhP6GamMw_8Qt437ho6CgBMhSScI6zo1jXRzvWXwHUN-BG6aFFgA">Login</a>
+  </div>
+</footer>
+
+    </app-header> -->
+  </app-header-layout>
+
+</app-drawer-layout>
+
+<chromedash-toast msg="Welcome to chromestatus.com!"></chromedash-toast>
+
+
+
+
+<script>
+/*! (c) 2016 Copyright (c) 2016 The Google Inc. All rights reserved. (Apache2) */
+"use strict";function _classCallCheck(e,r){if(!(e instanceof r))throw new TypeError("Cannot call a class as a function")}var _createClass=function(){function e(e,r){for(var n=0;n<r.length;n++){var t=r[n];t.enumerable=t.enumerable||!1,t.configurable=!0,"value"in t&&(t.writable=!0),Object.defineProperty(e,t.key,t)}}return function(r,n,t){return n&&e(r.prototype,n),t&&e(r,t),r}}(),Metric=function(){function e(r){if(_classCallCheck(this,e),!r)throw Error("Please provide a metric name");if(!e.supportsPerfMark&&(console.warn("Timeline won't be marked for \""+r+'".'),!e.supportsPerfNow))throw Error("This library cannot be used in this browser.");this.name=r}return _createClass(e,[{key:"duration",get:function(){var r=this._end-this._start;if(e.supportsPerfMark){var n=performance.getEntriesByName(this.name)[0];n&&"measure"!==n.entryType&&(r=n.duration)}return r||-1}}],[{key:"supportsPerfNow",get:function(){return performance&&performance.now}},{key:"supportsPerfMark",get:function(){return performance&&performance.mark}}]),_createClass(e,[{key:"log",value:function(){return console.info(this.name,this.duration,"ms"),this}},{key:"logAll",value:function(){var r=arguments.length<=0||void 0===arguments[0]?this.name:arguments[0];if(e.supportsPerfNow)for(var n=window.performance.getEntriesByName(r),t=0;t<n.length;++t){var a=n[t];console.info(r,a.duration,"ms")}return this}},{key:"start",value:function(){return this._start?(console.warn("Recording already started."),this):(this._start=performance.now(),e.supportsPerfMark&&performance.mark("mark_"+this.name+"_start"),this)}},{key:"end",value:function(){if(this._end)return console.warn("Recording already stopped."),this;if(this._end=performance.now(),e.supportsPerfMark){var r="mark_"+this.name+"_start",n="mark_"+this.name+"_end";performance.mark(n),performance.measure(this.name,r,n)}return this}},{key:"sendToAnalytics",value:function(e){var r=arguments.length<=1||void 0===arguments[1]?this.name:arguments[1],n=arguments.length<=2||void 0===arguments[2]?this.duration:arguments[2];return window.ga?n>=0&&ga("send","timing",e,r,n):console.warn("Google Analytics has not been loaded"),this}}]),e}();
+</script>
+
+
+<script>
+(function() {
+
+// TODO: move this into a behavior. It's duplicated from chromedash-featurelist.html.
+function matchesMilestone_(milestone, operator, version) {
+  switch (operator) {
+  case '<':
+    return milestone < version;
+    break;
+  case '<=':
+    return milestone <= version;
+    break;
+  case '>':
+    return milestone > version;
+    break;
+  case '>=':
+    return milestone >= version;
+    break;
+  case '=':  // Support both '=' and '=='.
+  case '==':
+    return milestone == version;
+    break;
+  default:
+    return false;
+  }
+}
+
+var search = $('.search input');
+var numSamples = $('.num-features');
+var categoryMenu = $('#papermenu');
+
+var t = $('#t');
+t.categories = {'JavaScript': 'javascript', 'Offline / Storage': 'offlinestorage', 'DOM': 'dom', 'Web Components': 'webcomponents', 'Multimedia': 'multimedia', 'Misc': 'misc', 'Network / Connectivity': 'networkconnectivity', 'Realtime / Communication': 'realtimecommunication', 'Graphics': 'graphics', 'Device': 'device', 'Performance': 'performance', 'Security': 'security', 'File APIs': 'fileapis', 'CSS': 'css', 'User input': 'userinput'}; // server included.
+t.prevSelectedCategory = null;
+
+// Set search box to URL deep link.
+if (location.hash) {
+  search.value = decodeURIComponent(location.hash.substr(1));
+}
+
+t._computeIcon = function(el) {
+  return 'chromestatus:' + (el ? el.dataset.category : '');
+};
+
+t._computeIconId = function(categoryStr) {
+  return 'chromestatus:' + this.categories[categoryStr];
+};
+
+t._computeFeatureLink = function(id) {
+  return '/features/' + id;
+};
+
+// and not part of the dom-bind template.
+t._onSelectCategory = function(e, detail) {
+  // Enable toggling selected item until
+  // https://github.com/PolymerElements/paper-menu/issues/50 is fixed.
+  if (this.selectedCategory === this.prevSelectedCategory) {
+    categoryMenu.selected = null;
+    this.selectedCategory = null;
+    this.prevSelectedCategory = null;
+  } else {
+    this.prevSelectedCategory = this.selectedCategory;
+  }
+  this.filter(search.value);
+};
+
+// TODO: move this into a behavior. It's duplicated from chromedash-featurelist.html.
+t._filterOnOperation = function(features, operator, version) {
+  return features.filter(function(f, idx, array) {
+    var platformMilestones = [
+      parseInt(f.shipped_milestone),
+      parseInt(f.shipped_android_milestone),
+      parseInt(f.shipped_ios_milestone),
+      parseInt(f.shipped_webview_milestone)
+    ];
+    for (var i = 0, milestone; milestone = platformMilestones[i]; ++i) {
+      if (matchesMilestone_(milestone, operator, version)) {
+        return true;  // Only one of the platforms needs to match.
+      }
+    }
+  });
+};
+
+// TODO: move filtering into a behavior. Mostly duped from chromedash-featurelist.html.
+t.filter = function(val) {
+  var features = this.features;
+
+  if (!features) {
+    return;
+  }
+
+  if (!val && !this.selectedCategory) {
+    if (history && history.replaceState) {
+      history.replaceState('', document.title, location.pathname + location.search);
+    } else {
+      location.hash = '';
+    }
+    this.filtered = features;
+    numSamples.textContent = this.filtered.length;
+
+    return;
+  }
+
+  if (val) {
+    val = val.trim();
+
+    if (history && history.replaceState) {
+      // Minimize updating URL.
+      this.debounce('updateurl', function() {
+        history.replaceState({}, document.title, '/samples#' + val);
+      }, 500);
+    }
+
+    // Returns operator and version query e.g. ["<=25", "<=", "25"].
+    var operatorMatch = /^([<>=]=?)\s*([0-9]+)/.exec(val);
+    if (operatorMatch) {
+      features = this._filterOnOperation(features, operatorMatch[1], operatorMatch[2]);
+    } else {
+      var regex = new RegExp(val, 'i');
+      features = features.filter(function(feature, idx, array) {
+        return regex.test(feature.name) || regex.test(feature.summary);
+      });
+    }
+  }
+
+  // Further refine list based on selected category in menu.
+  if (this.selectedCategory) {
+    var category = this.selectedCategory.textContent.trim();
+    var regex = new RegExp(category, 'i');
+    features = features.filter(function(feature, idx, array) {
+      return regex.test(feature.category);
+    });
+  }
+
+  this.filtered = features;
+
+  numSamples.textContent = this.filtered.length;
+};
+
+t.removeFilters = function() {
+  t.filter();
+};
+
+// Fire of samples.json XHR right away so data can populate faster.
+var samplesPromise = new Promise(function(resolve, reject) {
+  var url = location.hostname == 'localhost' ? 'https://www.chromestatus.com/samples.json' :
+                                               '/samples.json';
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.responseType = 'json';
+  xhr.onloadend = function(e) {
+    if (e.target.status < 400) {
+      resolve(e.target.response);
+    } else {
+      reject(new Error('Samples XHR failed with status ' + e.target.statusText));
+    }
+  };
+  xhr.onerror = reject;
+  xhr.send();
+});
+
+samplesPromise.then(function(features) {
+  var re = /github.com\/GoogleChrome\/samples\/tree\/gh-pages\/(.*)/i;
+  features.forEach(function(f, i) {
+    f.sample_links = f.sample_links.map(function(link) {
+      return link.replace(re, 'googlechrome.github.io/samples/$1');
+    });
+  });
+
+  t.features = features;
+  t.filtered = features;
+
+  numSamples.textContent = t.features.length;
+
+  document.body.classList.remove('loading');
+
+  t.filter(search.value);
+
+}, function(e) {
+  console.error(e);
+});
+
+// Clear input when user clicks the 'x' button.
+search.addEventListener('search', function(e) {
+  t.removeFilters();
+});
+
+search.addEventListener('keyup', function(e) {
+  if (!e.target.value && e.keyCode != 27) { // ESC
+    t.removeFilters();
+  } else {
+    t.filter(e.target.value);
+  }
+});
+
+search.addEventListener('keyup', function(e) {
+  if (!e.target.value && e.keyCode != 27) { // ESC
+    t.removeFilters();
+  } else {
+    t.filter(e.target.value);
+  }
+});
+
+categoryMenu.addEventListener('transitionend', function(e) {
+  t.selectedCategory = this.selectedItem;
+  t._onSelectCategory();
+});
+
+})();
+</script>
+
+
+<script>
+/*! (c) 2016 Copyright (c) 2016 The Google Inc. All rights reserved. (Apache2) */
+"use strict";!function(e){function r(){return caches.keys().then(function(e){var r=0;return Promise.all(e.map(function(e){if(e.includes("sw-precache"))return caches.open(e).then(function(e){return e.keys().then(function(n){return Promise.all(n.map(function(n){return e.match(n).then(function(e){return e.arrayBuffer()}).then(function(e){r+=e.byteLength})}))})})})).then(function(){return r})["catch"](function(){})})}function n(){"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(e){e.onupdatefound=function(){var n=e.installing;n.onstatechange=function(){switch(n.state){case"installed":t&&!navigator.serviceWorker.controller&&o.then(r().then(function(e){var r=Math.round(e/1e3);console.info("[ServiceWorker] precached",r,"KB");var n=new Metric("sw_precache");n.sendToAnalytics("service worker","precache size",e),t.showMessage("This site is cached ("+r+"KB). Ready to use offline!")}));break;case"redundant":throw Error("The installing service worker became redundant.")}}}})["catch"](function(e){console.error("Error during service worker registration:",e)})}var t=document.querySelector("chromedash-toast"),o=new Promise(function(e,r){return window.asyncImportsLoadPromise?window.asyncImportsLoadPromise.then(e,r):void e()});window.asyncImportsLoadPromise||n(),navigator.serviceWorker&&navigator.serviceWorker.controller&&(navigator.serviceWorker.controller.onstatechange=function(e){"redundant"===e.target.state&&!function(){var e=function(){window.location.reload()};t?o.then(function(){t.showMessage("A new version of this app is available.","Refresh",e,-1)}):e()}()}),e.registerServiceWorker=n}(window);
+
+// https://gist.github.com/ebidel/1d5ede1e35b6f426a2a7
+function lazyLoadWCPolyfillsIfNecessary() {
+  function onload() {
+    // For native Imports, manually fire WCR so user code
+    // can use the same code path for native and polyfill'd imports.
+    if (!('HTMLImports' in window)) {
+      document.body.dispatchEvent(
+          new CustomEvent('WebComponentsReady', {bubbles: true}));
+    }
+  }
+
+  var webComponentsSupported = ('registerElement' in document
+      && 'import' in document.createElement('link')
+      && 'content' in document.createElement('template'));
+  if (!webComponentsSupported) {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = './static/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+    script.onload = onload;
+    document.head.appendChild(script);
+  } else {
+    onload();
+  }
+}
+
+var button = document.querySelector('app-header paper-menu-button');
+button.addEventListener('click', function lazyHandler(e) {
+  this.removeEventListener('click', lazyHandler);
+
+  
+  var url = './static/elements/paper-menu-button.vulcanize.html';
+  
+
+  Polymer.Base.importHref(url, function() {
+    button.contentElement.hidden = false;
+    button.open();
+  }, null, true);
+});
+
+// Google Analytics
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-39048143-1', 'auto');
+ga('send', 'pageview');
+// End Google Analytics
+
+lazyLoadWCPolyfillsIfNecessary();
+</script>
+</body>
 </html>
